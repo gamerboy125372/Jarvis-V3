@@ -1,0 +1,68 @@
+{
+  "appId": "com.stark.jarvis",
+  "productName": "J.A.R.V.I.S.",
+  "copyright": "Stark Industries",
+  "main": "electron/main.js",
+
+  "directories": {
+    "output": "dist-desktop",
+    "buildResources": "electron/assets"
+  },
+
+  "files": [
+    "electron/**/*",
+    "api-server/dist/**/*",
+    "api-server/.env",
+    "jarvis-ui/dist/**/*",
+    "node_modules/.modules.yaml"
+  ],
+
+  "extraResources": [
+    {
+      "from": "api-server/node_modules",
+      "to": "app/api-server/node_modules",
+      "filter": ["**/*", "!**/*.md", "!**/.bin/**"]
+    },
+    {
+      "from": "api-server/dist",
+      "to": "app/api-server/dist"
+    },
+    {
+      "from": "jarvis-ui/dist",
+      "to": "app/jarvis-ui/dist"
+    },
+    {
+      "from": "api-server/.env",
+      "to": "app/api-server/.env",
+      "filter": ["**/*"]
+    }
+  ],
+
+  "win": {
+    "target": [
+      { "target": "nsis", "arch": ["x64"] }
+    ],
+    "icon": "electron/assets/icon.ico",
+    "artifactName": "JARVIS-Setup-${version}.exe"
+  },
+
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "J.A.R.V.I.S."
+  },
+
+  "mac": {
+    "target": "dmg",
+    "icon": "electron/assets/icon.icns",
+    "category": "public.app-category.productivity"
+  },
+
+  "linux": {
+    "target": "AppImage",
+    "icon": "electron/assets/icon.png",
+    "category": "Utility"
+  }
+}
